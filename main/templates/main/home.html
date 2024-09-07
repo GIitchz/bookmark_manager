@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Home{%endblock%}
+
+{% block content %}
+{% if user.is_authenticated == False %}
+    <h1>Please login <a href='/login'>here</a></h1>
+{% else %}
+    <h1>Hello, {{name}}</h1>
+    {% if is_empty == False %}
+        <p>
+            Here is a random bookmark:<br><br>
+            <li class="list-group-item border-0">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">{{bookmark.description}}</li>
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <button onclick= "window.open('{{bookmark.url}}','_blank')" type="goToSite" class="btn list-group-item">Go to bookmark</button></a>
+                            <button onclick= "window.location.href='edit/{{bookmark.id}}'" type="Edit" class="btn list-group-item">Edit</button></a>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </p>
+    {% else %}
+        <p>
+            All bookmarks completed!
+        </p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

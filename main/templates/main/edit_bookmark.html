@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{%block title%}Edit{%endblock%}
+
+{%block content%}
+<h1>Bookmark</h1>
+<form method="post" action="#">
+    {%csrf_token%}
+    <div class="form-group">
+                <label for="url">url</label>
+                <input type="text" class="form-control" id="url" name="url" value="{{bm.url}}">
+    </div>
+    <div class="form-group">
+        <label for="description">description</label>
+        <textarea id="description" class="form-control" name="description">{{bm.description}}</textarea>
+    </div>
+    <div class="form-check">
+        {% if bm.isComplete == False %}
+            <input type="checkbox" class="form-check-input" id="isComplete" name="isComplete">
+        {% else %}
+            <input type="checkbox" class="form-check-input" id="isComplete" name="isComplete" checked>
+        {% endif %}
+        <label class="form-check-label" for="isComplete" >is completed</label>
+      </div>
+    <br>
+    <div class="col">
+        <button type="submit" name="save" value="save" class="btn btn-primary">Save</button>
+        <button type="submit" name="delete" value="delete" class="btn btn-danger">Delete</button>
+    </div>
+</form>
+{%endblock%}

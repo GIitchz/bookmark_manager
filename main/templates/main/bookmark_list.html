@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block title %}List{%endblock%}
+
+{% block content %}
+<h1>Bookmarks</h1>
+<p>
+    <div class="row">
+        <div class="col">
+            <h2>Not Completed</h2>
+        </div>
+        <div style="padding-right: 2.5%;" class="col d-flex justify-content-end">
+            <form method="post" action="#">
+                {%csrf_token%}
+                <button type="submit" name="addBookmark" class="btn btn-success">Add new bookmark</button>
+            </form>
+        </div>
+    </div>
+    <ol class="list-group">
+        {% for bookmark in not_completed %}
+            <li class="list-group-item border-0">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">{{bookmark.description}}</li>
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <button onclick= "window.open('{{bookmark.url}}','_blank')" type="goToSite" class="btn list-group-item">Go to bookmark</button></a>
+                            <button onclick= "window.location.href='edit/{{bookmark.id}}'" type="Edit" class="btn list-group-item">Edit</button></a>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
+    </ol>
+    <h2>Completed</h2>
+    <ol class="list-group">
+        {% for bookmark in completed %}
+        <li class="list-group-item border-0">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success">{{bookmark.description}}</li>
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <button onclick= "window.open('{{bookmark.url}}','_blank')" type="goToSite" class="btn list-group-item">Go to bookmark</button></a>
+                        <button onclick= "window.location.href='edit/{{bookmark.id}}'" type="Edit" class="btn list-group-item">Edit</button></a>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ol>
+</p>
+{% endblock %}
