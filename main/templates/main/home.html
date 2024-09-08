@@ -16,7 +16,10 @@
                     <li class="list-group-item">
                         <ul class="list-group list-group-horizontal">
                             <button onclick= "window.open('{{bookmark.url}}','_blank')" type="goToSite" class="btn list-group-item">Go to bookmark</button></a>
-                            <button onclick= "window.location.href='edit/{{bookmark.id}}'" type="Edit" class="btn list-group-item">Edit</button></a>
+                            <form method="POST" action="#">
+                                {% csrf_token %}
+                                <button type="submit" class="btn list-group-item" name="c{{bookmark.id}}">Mark as completed</button></a>
+                            </form>
                         </ul>
                     </li>
                 </ul>
